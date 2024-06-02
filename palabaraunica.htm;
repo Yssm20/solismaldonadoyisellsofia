@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabra con más caracteres únicos</title>
+    <script>
+        function contarCaracteresUnicos(palabra) {
+            let caracteresUnicos = new Set();
+            for (let i = 0; i < palabra.length; i++) {
+                let char = palabra[i];
+                if (char >= 'A' && char <= 'Z') {
+                    caracteresUnicos.add(char);
+                }
+            }
+            return caracteresUnicos.size;
+        }
+
+        function encontrarPalabraConMasCaracteresUnicos() {
+            // Obtener el valor del campo de texto
+            var input = document.getElementById('inputPalabras').value;
+
+            // Dividir la cadena de entrada en palabras utilizando la coma como delimitador
+            var palabras = input.split(',');
+
+            // Inicializar variables para almacenar la palabra con más caracteres únicos
+            var palabraConMasUnicos = '';
+            var maxUnicos = 0;
+
+            // Recorrer cada palabra para contar sus caracteres únicos
+            for (let palabra of palabras) {
+                let numUnicos = contarCaracteresUnicos(palabra);
+                if (numUnicos > maxUnicos) {
+                    maxUnicos = numUnicos;
+                    palabraConMasUnicos = palabra;
+                }
+            }
+
+            // Mostrar el resultado en el párrafo con id 'resultado'
+            document.getElementById('resultado').innerText = `La palabra con más caracteres únicos es "${palabraConMasUnicos}" con ${maxUnicos} caracteres únicos.`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Palabra con más caracteres únicos</h1>
+    <p>Introduce una lista de palabras separadas por comas (sin espacios):</p>
+    <input type="text" id="inputPalabras" />
+    <button onclick="encontrarPalabraConMasCaracteresUnicos()">Encontrar</button>
+    <p id="resultado"></p>
+</body>
+</html>
